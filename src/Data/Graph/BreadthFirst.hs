@@ -29,5 +29,5 @@ _search acc field = case E.flagGoal acc of
                                  ) `map` (heads `zip` tails)
                         _acc = (nextss `zip` acc) >>=
                             (\(nexts, a) -> zipPrepend nexts $ replicate (length nexts) a)
-                        _field = E.remove heads field
+                        _field = E.remove field heads
 

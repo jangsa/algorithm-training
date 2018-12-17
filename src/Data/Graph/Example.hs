@@ -2,6 +2,7 @@ module Data.Graph.Example where
 
 import qualified Data.Map as M
 import qualified Data.Misc as MSC
+import Control.Monad
 
 data Vertex = Start | Goal | Vertex Int deriving (Show, Eq, Ord)
 type From = Vertex
@@ -9,9 +10,8 @@ type Dest = Vertex
 type Dests = [Dest]
 type Route = [Dest]
 
-remove :: Dests -> M.Map Vertex Dests -> M.Map Vertex Dests
-remove [] fd = fd
-remove (h:t) fd = remove t (M.delete h fd)
+remove :: M.Map Vertex Dests -> Dests -> M.Map Vertex Dests
+remove = foldr M.delete
 
 flagGoal :: [Route] -> Route
 flagGoal [] = []

@@ -9,16 +9,13 @@ exists k (x:xs)
 
 -- increase list layer with each element
 layerup :: [a] -> [[a]]
-layerup = _layerup []
-
-_layerup :: [[a]] -> [a] -> [[a]]
-_layerup acc [] = acc -- no need to reverse coz all same
-_layerup acc (x:xs) = _layerup ([x]:acc) xs
+layerup = map (\x -> [x])
 
 -- prepend each head of the first list arg to head of the sencond list arg
 zipPrepend :: [a] -> [[a]] -> [[a]]
 zipPrepend x y = map (\(a,b) -> a : b) $ x `zip` y
 
+-- as name says
 distinct :: Eq a => [a] -> [a]
 distinct xs = _distinct [] xs
 
