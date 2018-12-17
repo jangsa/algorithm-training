@@ -8,6 +8,6 @@ import qualified Data.Graph.Example as E
 
 run :: IO ()
 run = do
-    putStrLn . show $ DF.search E.Start [] E.maze
-    putStrLn . show $ BF.search E.maze
+    putStrLn . show $ DF.search E.maze E.Start 
+    putStrLn . show $ BF.search E.maze E.Start
 

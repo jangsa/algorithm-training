@@ -4,15 +4,15 @@ import qualified Data.Map as M
 import qualified Data.Graph.Example as E
 import Data.Misc
 
-search :: M.Map E.From E.Dests -> E.Route
-search field = _search acc _field
+search :: M.Map E.From E.Dests -> E.Vertex -> E.Route
+search field start = _search acc _field
     where
-        nexts   = case M.lookup E.Start field of
+        nexts   = case M.lookup start field of
                       Just v  -> v
                       Nothing -> []
-        initacc = layerup $ replicate (length nexts) E.Start
+        initacc = layerup $ replicate (length nexts) start
         acc     = zipPrepend nexts initacc
-        _field  = M.delete E.Start field
+        _field  = M.delete start field
 
 _search :: [E.Route] -> M.Map E.From E.Dests -> E.Route
 _search [] _ = []
