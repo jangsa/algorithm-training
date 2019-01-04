@@ -25,11 +25,9 @@ fn ordered_maze_test() -> Result<(), Vec<Vertex<i32>>> {
     if result
         == vec![
             Start,
-            Vertice(1),
-            Vertice(3),
-            Vertice(4),
-            Vertice(5),
-            Vertice(6),
+            Vertice(8),
+            Vertice(14),
+            Vertice(8),
             Vertice(7),
             Vertice(9),
             Goal,

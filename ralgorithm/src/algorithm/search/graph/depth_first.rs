@@ -15,54 +15,58 @@ pub fn _search(
     mut field: HashMap<Vertex<i32>, Vec<Vertex<i32>>>,
     goal: &Vertex<i32>,
 ) -> Vec<Vertex<i32>> {
-    let result: Vec<Vertex<i32>> = match field.get_mut(&curr) {
+    let _curr = match field.get_mut(&curr) {
         // when reached goal
         _ if *curr == *goal => {
             acc.push(*curr);
-            acc
+            return acc;
         }
 
         // when vertices found
         Some(ns) => {
             if let Some(next) = ns.pop() {
+                // go to next depth
                 acc.push(*curr);
-                println!("-----> acc: {:?}, ns: {:?}", acc, ns);
-                // _search(&next, acc, field, goal) // to be fixed
-                _search(&next, acc, HashMap::new(), goal) // to be fixed
+                next
             } else if let Some(prev) = acc.pop() {
-                // _search(&prev, acc, field, goal) // to be fixed
-                _search(&prev, acc, HashMap::new(), goal) // to be fixed
+                // backtrack
+                prev
             } else {
-                vec![]
+                // no answer
+                return vec![];
             }
         }
 
-        // when vertice not found
-        None => vec![],
+        // when next is not registered
+        None => return vec![],
     };
 
-    result
-}
+    _search(&_curr, acc, field, goal)
 
-// if *curr == *goal {
-//     // when reached goal
-//     acc.push(*curr);
-//     return acc;
-// } else {
-//     if let Some(ns) = field.get_mut(&curr) {
-//         // when vertices found
-//         if let Some(next) = ns.pop() {
-//             acc.push(*curr);
-//             _search(&next, acc, field, goal)
-//         } else if let Some(prev) = acc.pop() {
-//             // when no next AND backtrackable
-//             _search(&prev, acc, field, goal)
-//         } else {
-//             // when searched entirely but no goal
-//             return vec![];
-//         }
-//     } else {
-//         // when vertices NOT found
-//         return vec![];
-//     }
-// }
+    /* the following works on Rust 2018 */
+    // match field.get_mut(&curr) {
+    //     // when reached goal
+    //     _ if *curr == *goal => {
+    //         acc.push(*curr);
+    //         acc
+    //     }
+
+    //     // when vertices found
+    //     Some(ns) => {
+    //         if let Some(next) = ns.pop() {
+    //             // go to next depth
+    //             acc.push(*curr);
+    //             _search(&next, acc, field, goal) // to be fixed
+    //         } else if let Some(prev) = acc.pop() {
+    //             // backtrack
+    //             _search(&prev, acc, field, goal) // to be fixed
+    //         } else {
+    //             // no answer
+    //             vec![]
+    //         }
+    //     }
+
+    //     // when next is not registered
+    //     None => vec![],
+    // }
+}
