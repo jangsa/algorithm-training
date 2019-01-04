@@ -22,10 +22,11 @@ pub fn _search(
             acc
         }
 
+        // when vertices found
         Some(ns) => {
             if let Some(next) = ns.pop() {
                 acc.push(*curr);
-                println!("-----> {:?}", ns);
+                println!("-----> acc: {:?}, ns: {:?}", acc, ns);
                 // _search(&next, acc, field, goal) // to be fixed
                 _search(&next, acc, HashMap::new(), goal) // to be fixed
             } else if let Some(prev) = acc.pop() {
@@ -36,12 +37,32 @@ pub fn _search(
             }
         }
 
-        // when vertex not found in the field AND backtrackable
-        None if acc.len() > 0 => panic!("No Target Vertex Found."),
-
-        // when not found
-        _ => vec![],
+        // when vertice not found
+        None => vec![],
     };
 
     result
 }
+
+// if *curr == *goal {
+//     // when reached goal
+//     acc.push(*curr);
+//     return acc;
+// } else {
+//     if let Some(ns) = field.get_mut(&curr) {
+//         // when vertices found
+//         if let Some(next) = ns.pop() {
+//             acc.push(*curr);
+//             _search(&next, acc, field, goal)
+//         } else if let Some(prev) = acc.pop() {
+//             // when no next AND backtrackable
+//             _search(&prev, acc, field, goal)
+//         } else {
+//             // when searched entirely but no goal
+//             return vec![];
+//         }
+//     } else {
+//         // when vertices NOT found
+//         return vec![];
+//     }
+// }
