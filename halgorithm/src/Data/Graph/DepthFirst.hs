@@ -1,16 +1,16 @@
 module Data.Graph.DepthFirst where
 
 import qualified Data.Map as M
-import qualified Data.Graph.Example as E
+import Data.Graph.Helper
 import Data.Misc (exists)
 
-search :: M.Map E.From E.Dests -> E.Vertex -> E.Route
+search :: M.Map From Dests -> Vertex -> Route
 search field start = _search start [] field
 
-_search :: E.From -> E.Route -> M.Map E.From E.Dests -> E.Route
+_search :: From -> Route -> M.Map From Dests -> Route
 _search _ _ field | M.null field = []
 _search curr acc field
-    | curr == E.Goal         = reverse (curr:acc)
+    | curr == Goal         = reverse (curr:acc)
     | isDeadEnd || isCleared = backtrack acc
     | otherwise              = case lookup of
                                    Just (nexth:nextt) ->

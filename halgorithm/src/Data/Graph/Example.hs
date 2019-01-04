@@ -1,23 +1,7 @@
 module Data.Graph.Example where
 
 import qualified Data.Map as M
-import qualified Data.Misc as MSC
-import Control.Monad
-
-data Vertex = Start | Goal | Vertex Int deriving (Show, Eq, Ord)
-type From = Vertex
-type Dest = Vertex
-type Dests = [Dest]
-type Route = [Dest]
-
-remove :: M.Map Vertex Dests -> Dests -> M.Map Vertex Dests
-remove = foldr M.delete
-
-flagGoal :: [Route] -> Route
-flagGoal [] = []
-flagGoal (xs:xss)
-    | MSC.exists Goal xs = xs
-    | otherwise = flagGoal xss
+import Data.Graph.Helper
 
 maze :: M.Map From Dests
 maze =  M.fromList [

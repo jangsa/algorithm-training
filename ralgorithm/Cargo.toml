@@ -1,0 +1,6 @@
+[package]
+name = "ralgorithm"
+version = "0.1.0"
+authors = ["jangsa <gute.ist.wieder.tot@gmail.com>"]
+
+[dependencies]
