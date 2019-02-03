@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use algorithm::search::graph::structure::Vertex::*;
+use self::Vertex::*;
 
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
 pub enum Vertex<A> {

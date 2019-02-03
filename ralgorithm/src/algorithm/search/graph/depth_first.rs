@@ -1,4 +1,4 @@
-use algorithm::search::graph::structure::Vertex;
+use super::structure::Vertex;
 use std::collections::HashMap;
 
 pub fn search(
