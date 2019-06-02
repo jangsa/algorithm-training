@@ -5,5 +5,6 @@ use crate::algorithm::search::graph::structure::Vertex::{Goal, Start};
 use crate::algorithm::search::graph::structure::*;
 
 fn main() {
-    search(maze_01(), &Start, &Goal);
+    let res = search(maze_01(), &Start, &Goal);
+    println!("{:?}", res);
 }

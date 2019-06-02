@@ -1,6 +1,8 @@
-use crate::algorithm::search::graph::depth_first;
-use crate::algorithm::search::graph::structure::Vertex::{Goal, Start, Vertex as Vertice};
-use crate::algorithm::search::graph::structure::*;
+extern crate ralgorithm;
+
+use crate::ralgorithm::algorithm::search::graph::depth_first;
+use crate::ralgorithm::algorithm::search::graph::structure::Vertex::{Goal, Start, Vertex as Vertice};
+use crate::ralgorithm::algorithm::search::graph::structure::*;
 
 #[test]
 fn start_to_goal_test() -> Result<(), Vec<Vertex<i32>>> {
