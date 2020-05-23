@@ -16,18 +16,21 @@ search field start = _search acc _field
 
 _search :: [Route] -> M.Map From Dests -> Route
 _search [] _ = []
-_search acc field = case flagGoal acc of
+_search accRoutes field = case flagGoal accRoutes of
                         answer@(x:xs)    -> reverse answer
                         _ | M.null field -> []
-                        _                -> _search _acc _field
+                        _                -> _search _accRoutes _field
                     where
-                        heads = head `map` acc
-                        tails = tail `map` acc
-                        nextss = (\(h, t) -> case M.lookup h field of
-                                                 Just v -> filter (not . flip exists t) v
-                                                 _ -> []
-                                 ) `map` (heads `zip` tails)
-                        _acc = (nextss `zip` acc) >>=
+                        heads = head <$> accRoutes
+                        tails = tail <$> accRoutes
+                        horizFilter = \h -> \t ->
+                          case M.lookup h field of
+                              Just v -> filter (not . flip exists t) v
+                              _      -> []
+
+                        nextss = zipWith horizFilter heads tails
+                        _accRoutes =
+                          (nextss `zip` accRoutes) >>=
                             (\(nexts, a) -> zipPrepend nexts $ replicate (length nexts) a)
                         _field = remove field heads
 
